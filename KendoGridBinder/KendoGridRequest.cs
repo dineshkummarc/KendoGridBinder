@@ -11,6 +11,11 @@ namespace KendoGridBinder
         public int PageSize { get; set; }
         public string Logic { get; set; }
 
+		public FilterObjectWrapper FilterObject
+		{
+			get { return this.FilterObjectWrapper; }
+		}
+
         internal FilterObjectWrapper FilterObjectWrapper { get; set; }
         internal IEnumerable<SortObject> SortObjects { get; set; }
     }
