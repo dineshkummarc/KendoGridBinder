@@ -3,13 +3,8 @@
 }
 
 <h2>Index</h2>
-
-
-
-
-
-
  
+<input type="button" id="testbutton"  value="export" />
 
 
 <div id="grid"></div>
@@ -24,7 +19,16 @@
     }
 
     $(document).ready(function () {
+    
+        $('#testbutton').click(function () {
+            console.log('asdfasd   '    );
+        });
+
+
+
         var url = '@Url.Action("Grid")';
+        var exportUrl = '@Url.Action("Export")';
+
 
         var dataSource = new kendo.data.DataSource({
             serverPaging: true,
@@ -48,6 +52,7 @@
             schema: {
                 data: 'data',
                 total: 'total',
+                height: 400,
                 model: {
                     id: 'EmployeeId',
                     fields: {
@@ -57,14 +62,20 @@
                         HireDate: { type: 'date' },
                         Active: { type: 'boolean' }
                     }
-                }
+                } 
             }
         });
-         
+
+
+            
+        function onDataBound(arg) {
+            console.log('Grid data bound' + dataSource.parameterMap);
+        }
 
         $('#grid').kendoGrid({
-            dataSource: dataSource, 
+            dataSource: dataSource,
             height: 400,
+            
             columns: [
                 { field: 'Name', title: 'Name' },
                 { field: 'Email' },
@@ -72,10 +83,9 @@
                 { field: 'HireDate', title: 'Hire Date', template: '#= kendo.toString(toDate(HireDate), "MM/dd/yyyy")#' },
                 { field: 'Active' }
             ],
+        
             filterable: true,
-            sortable: {
-                mode: 'multiple'
-            },
+            sortable: true,
             pageable: true
         });
     });

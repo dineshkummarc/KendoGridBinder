@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Grid Example";
+    ViewBag.Title = "Index";
 }
 
-
-
+<h2>Index</h2>
  
+<input type="button" id="testbutton"  value="export" />
 
 
 <div id="grid"></div>
@@ -19,7 +19,16 @@
     }
 
     $(document).ready(function () {
-        var url = '@Url.Action("Grid")';
+    
+        $('#testbutton').click(function () {
+            console.log('asdfasd   '    );
+        });
+
+
+
+        var url = '@Url.Action("Grid2")';
+        var exportUrl = '@Url.Action("Export")';
+
 
         var dataSource = new kendo.data.DataSource({
             serverPaging: true,
@@ -31,7 +40,7 @@
                     type: 'post',
                     dataType: 'json',
                     url: url
-                },
+                }, 
                 // annyoing work-around for adding date types to the request
                 parameterMap: function (options) {
                     if (options.filter) {
@@ -39,26 +48,33 @@
                     }
                     return options;
                 }
+
             },
             schema: {
                 data: 'data',
-                total: 'total',
+                total: 'total' ,
                 model: {
-                    id: 'EmployeeId',
-                    fields: {
-                        Name: { type: 'string' },
-                        Email: { type: 'string' },
-                        EmployeeNumber: { type: 'number' },
-                        HireDate: { type: 'date' },
-                        Active: { type: 'boolean' }
-                    }
+                  id: 'EmployeeId',
+                  fields: {
+                      Name: { type: 'string' },
+                      Email: { type: 'string' },
+                      EmployeeNumber: { type: 'number' },
+                      HireDate: { type: 'date' },
+                      Active: { type: 'boolean' }
+                  }
                 }
+                 
             }
         });
-         
-        
+
+
+            
+        function onDataBound(arg) {
+            console.log('Grid data bound' + dataSource.parameterMap);
+        }
+
         $('#grid').kendoGrid({
-            dataSource: dataSource,  
+            dataSource: dataSource,
             height: 400,
             columns: [
                 { field: 'Name', title: 'Name' },
@@ -67,13 +83,17 @@
                 { field: 'HireDate', title: 'Hire Date', template: '#= kendo.toString(toDate(HireDate), "MM/dd/yyyy")#' },
                 { field: 'Active' }
             ],
-            filterable: false,
-            sortable: {
-                mode: 'multiple'
-            },
+            filterable: true,
+            sortable: true,
             pageable: true
         });
     });
     
 
 </script>
+
+
+
+
+
+
