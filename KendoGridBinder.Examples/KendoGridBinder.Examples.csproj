@@ -84,10 +84,12 @@
   <ItemGroup>
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InlineController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConfigDto.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\EmployeeRepository.cs" />
@@ -290,6 +292,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Test\Index2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inline\ViewPage1.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inline\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

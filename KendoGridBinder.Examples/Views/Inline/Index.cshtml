@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title> 
+        
+        <script src="/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="/Scripts/kendo/kendo.all.min.js" type="text/javascript"></script>
+        <script src="../../Scripts/kendo/console.js" type="text/javascript"></script>
+        <link href="/Content/kendo/kendo.common.min.css" rel="stylesheet" type="text/css" />
+        <link href="/Content/kendo/kendo.default.min.css" rel="stylesheet" type="text/css" />
+    
+     
+    </head>
+    <body> 
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    var crudServiceBaseUrl = "/Inline",
+                        dataSource = new kendo.data.DataSource({
+                            transport: {
+                                read: {
+                                    url: crudServiceBaseUrl + "/AjaxRead",
+                                    dataType: "json"
+                                },
+                                update: {
+                                    url: crudServiceBaseUrl + "/AjaxUpdate",
+                                    dataType: "jsonp"
+                                },
+                                destroy: {
+                                    url: crudServiceBaseUrl + "/AjaxDestroy",
+                                    dataType: "jsonp"
+                                },
+                                create: {
+                                    url: crudServiceBaseUrl + "/AjaxCreate",
+                                    dataType: "jsonp"
+                                },
+                                parameterMap: function (options, operation) {
+                                    if (operation !== "read" && options.models) {
+                                        return { models: kendo.stringify(options.models) };
+                                    }
+                                }
+                            },
+                            batch: true,
+                            pageSize: 10,
+                            schema: {
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Name: { type: 'string' },
+                                        Value: { type: 'string' }
+                                    }
+                                }
+                            }
+                        });
+
+                    $("#grid").kendoGrid({
+                        dataSource: dataSource,
+                        pageable: true,
+                        toolbar: ["create"],
+                        columns: [
+                            "Name",
+                            "Value",
+                            { command: ["edit", "destroy"], title: "&nbsp;", width: "210px"}],
+                        editable: "inline"
+                    });
+                });
+            </script>
+        </div>
+
+
+    </body>
+</html>

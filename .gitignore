@@ -6,3 +6,5 @@ KendoGridBinder.Examples/bin
 KendoGridBinder.Examples/obj
 KendoGridBinder/bin
 KendoGridBinder/obj
+*.suo
+*.suo.orig

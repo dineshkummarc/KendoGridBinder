@@ -3,12 +3,15 @@
 }
 
 <h2>Index</h2>
+<<<<<<< HEAD
+=======
 
 
 
 
 <input type="button" value="test" id="btnExport" />
 
+>>>>>>> origin/HEAD
  
 <input type="button" id="testbutton"  value="export" />
 
@@ -25,8 +28,18 @@
     }
 
     $(document).ready(function () {
-        var url = '@Url.Action("Grid")';
+    
+        $('#testbutton').click(function () {
+            console.log('asdfasd   '    );
+        });
 
+
+
+        var url = '@Url.Action("Grid")';
+        var exportUrl = '@Url.Action("Export")';
+
+<<<<<<< HEAD
+=======
         $('#btnExport').click(function () {
             var dataSource = $('#grid').data('kendoGrid').dataSource;
             var page = dataSource._page;
@@ -34,6 +47,8 @@
             var take = dataSource._take;
             console.log('page=' + page + '   skip=' + skip + '   take=' + take);
         });
+>>>>>>> origin/HEAD
+
         var dataSource = new kendo.data.DataSource({
             serverPaging: true,
             serverSorting: true,
@@ -70,11 +85,14 @@
             }
         });
 
+<<<<<<< HEAD
 
             
         function onDataBound(arg) {
             console.log('Grid data bound' + dataSource.parameterMap);
         }
+=======
+>>>>>>> origin/HEAD
 
         $('#grid').kendoGrid({
             dataSource: dataSource,
